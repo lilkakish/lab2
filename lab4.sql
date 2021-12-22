@@ -1,4 +1,4 @@
---1. Çàïîâíèòè òàáëèö³ âàøî¿ ÁÄ â ğåæèì³ îäèíî÷íîãî ³ ãğóïîâîãî äîïî
+--1. Ğ—Ğ°Ğ¿Ğ¾Ğ²Ğ½Ğ¸Ñ‚Ğ¸ Ñ‚Ğ°Ğ±Ğ»Ğ¸Ñ†Ñ– Ğ²Ğ°ÑˆĞ¾Ñ— Ğ‘Ğ” Ğ² Ñ€ĞµĞ¶Ğ¸Ğ¼Ñ– Ğ¾Ğ´Ğ¸Ğ½Ğ¾Ñ‡Ğ½Ğ¾Ğ³Ğ¾ Ñ– Ğ³Ñ€ÑƒĞ¿Ğ¾Ğ²Ğ¾Ğ³Ğ¾ Ğ´Ğ¾Ğ¿Ğ¾
 insert into pacient(id,name) values (1, 'namel');
 insert all
 into pacient values (2,'','name2','','','','','','')
@@ -6,7 +6,7 @@ into pacient values (3, '','name3','','','','','','')
 into pacient values (4, '','name4','','','','','','')
 into pacient values (5,'', 'name5','','','','','','')
 select * from pacient;
---2. Ñòâîğèòè ôàéëè ç äàíèìè (áóäü-ÿêîãî ñóì³ñíîãî òèïó) ³ çàïîâíèòè
+--2. Ğ¡Ñ‚Ğ²Ğ¾Ñ€Ğ¸Ñ‚Ğ¸ Ñ„Ğ°Ğ¹Ğ»Ğ¸ Ğ· Ğ´Ğ°Ğ½Ğ¸Ğ¼Ğ¸ (Ğ±ÑƒĞ´ÑŒ-ÑĞºĞ¾Ğ³Ğ¾ ÑÑƒĞ¼Ñ–ÑĞ½Ğ¾Ğ³Ğ¾ Ñ‚Ğ¸Ğ¿Ñƒ) Ñ– Ğ·Ğ°Ğ¿Ğ¾Ğ²Ğ½Ğ¸Ñ‚Ğ¸
 create or replace directory data_load as 'C:\\load\\';
 create table DISTRICT_TYPE_LOAD(
 id int,
@@ -31,10 +31,12 @@ location ('loading.txt')
 ) ;
 insert into narko_dispancer select * from DISTRICT_TYPE_LOAD;
 --drop table DISTRICT_TYPE_LOAD;
---3. Âèêîíàòè ìîäèô³êàö³ş çíà÷åíü ó áóäü-ÿêèõ òàáëèöÿõ ÁÄ äëÿ îäíîãî
+--3. Ğ’Ğ¸ĞºĞ¾Ğ½Ğ°Ñ‚Ğ¸ Ğ¼Ğ¾Ğ´Ğ¸Ñ„Ñ–ĞºĞ°Ñ†Ñ–Ñ Ğ·Ğ½Ğ°Ñ‡ĞµĞ½ÑŒ Ñƒ Ğ±ÑƒĞ´ÑŒ-ÑĞºĞ¸Ñ… Ñ‚Ğ°Ğ±Ğ»Ğ¸Ñ†ÑÑ… Ğ‘Ğ” Ğ´Ğ»Ñ Ğ¾Ğ´Ğ½Ğ¾Ğ³Ğ¾
 update pacient set name = 'update many' where id > 3;
 update pacient set name = 'update one' where name = 'name3';
---4. Âèäàëèòè çàïèñè (îäèí çàïèñ, ãğóïó çàïèñ³â, óñ³ çàïèñè) 
+--4. Ğ’Ğ¸Ğ´Ğ°Ğ»Ğ¸Ñ‚Ğ¸ Ğ·Ğ°Ğ¿Ğ¸ÑĞ¸ (Ğ¾Ğ´Ğ¸Ğ½ Ğ·Ğ°Ğ¿Ğ¸Ñ, Ğ³Ñ€ÑƒĞ¿Ñƒ Ğ·Ğ°Ğ¿Ğ¸ÑÑ–Ğ², ÑƒÑÑ– Ğ·Ğ°Ğ¿Ğ¸ÑĞ¸) 
 --delete from pacient where id = 3;
 --delete from pacient where id > 3;
 --truncate table pacient;
+
+
