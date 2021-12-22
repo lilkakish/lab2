@@ -1,40 +1,27 @@
---1. Çàïîâíèòè òàáëèö³ âàøî¿ ÁÄ â ðåæèì³ îäèíî÷íîãî ³ ãðóïîâîãî äîïî
-insert into pacient(id,name) values (1, 'namel');
-insert all
-into pacient values (2,'','name2','','','','','','')
-into pacient values (3, '','name3','','','','','','')
-into pacient values (4, '','name4','','','','','','')
-into pacient values (5,'', 'name5','','','','','','')
-select * from pacient;
---2. Ñòâîðèòè ôàéëè ç äàíèìè (áóäü-ÿêîãî ñóì³ñíîãî òèïó) ³ çàïîâíèòè
-create or replace directory data_load as 'C:\\load\\';
-create table DISTRICT_TYPE_LOAD(
-id int,
-name varchar(50),
+--1. Ð’Ð¸Ð»ÑƒÑ‡Ð¸Ñ‚Ð¸ Ð±ÑƒÐ´ÑŒ-ÑÐºÐ¸Ð¹ Ð·Ð²' ÑÐ·Ð¾Ðº Ð¼Ñ–Ð¶ Ñ‚Ð°Ð±Ð»Ð¸Ñ†ÑÐ¼Ð¸ Ð²Ð°ÑˆÐ¾Ñ— Ð‘Ð”.
+alter table doctor
+drop constraint doctor_ibfk_1 ;
+--2. Ð’Ð¸Ð»ÑƒÑ‡Ð¸Ñ‚Ð¸ Ñ– Ð·Ð¼Ñ–Ð½Ð¸Ñ‚Ð¸ Ñ…Ð°Ñ€Ð°ÐºÑ‚ÐµÑ€Ð¸ÑÑ‚Ð¸ÐºÐ¸ Ð¿Ð¾Ð»Ñ Ñƒ Ð¾Ð´Ð½Ñ–Ð¹ Ð· Ñ‚Ð°Ð±Ð»Ð¸Ñ†ÑŒ Ð²Ð°ÑˆÐ¾Ñ— Ð‘Ð”.
+alter table doctor
+drop column category;
+alter table doctor
+modify name varchar(50);
+--3. Ð—Ð¼Ñ–Ð½Ð¸Ñ‚Ð¸ Ð¿Ð¾Ð»Ðµ Ñƒ Ð¾Ð´Ð½Ñ–Ð¹ Ð· Ñ‚Ð°Ð±Ð»Ð¸Ñ†ÑŒ Ð²Ð°ÑˆÐ¾Ñ— Ð‘Ð”.
+alter table doctor
+rename column dispancer to dispancer_info_111;
+--4. Ð”Ð¾Ð´Ð°Ñ‚Ð¸ Ð¿Ð¾Ð»Ðµ Ñ– Ð½Ð¾Ð²Ðµ Ð¾Ð±Ð¼ÐµÐ¶ÐµÐ½Ð½Ñ ÑƒÐ½Ñ–ÐºÐ°Ð»ÑŒÐ½Ð¾ÑÑ‚Ñ– Ð´Ð¾ Ð±ÑƒÐ´ÑŒ-ÑÐºÐ¾Ñ— Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñ– Ð²Ð°ÑˆÐ¾Ñ— Ð‘Ð”.
+alter table doctor
+add age int;
 
 
 
 
-address1 varchar(60) ,
-telephone1 varchar(60) ,
-email1 varchar(60))
+alter table doctor 
+add constraint constr unique (fathername, age);
+--5. Ð—Ð¼Ñ–Ð½Ð¸Ñ‚Ð¸ Ñ‚Ð¸Ð¿ Ð¾Ð±Ð¼ÐµÐ¶ÐµÐ½Ð½Ñ Ñ†Ñ–Ð»Ñ–ÑÐ½Ð¾ÑÑ‚Ñ– Ð´Ð»Ñ Ð·Ð²' ÑÐ·ÐºÑƒ Ñƒ Ð¾Ð´Ð½Ñ–Ð¹ Ð· Ñ‚Ð°Ð±Ð»Ð¸Ñ†ÑŒ Ð²Ð°ÑˆÐ¾Ñ— Ð’Ð”
+alter table registration
+drop constraint code_doctor;
 
-organization external(
-type ORACLE_LOADER
-default directory data_load
-
-access parameters(
-records delimited by newline
-fields terminated by ','
-missing field values are null)
-location ('loading.txt')
-) ;
-insert into narko_dispancer select * from DISTRICT_TYPE_LOAD;
---drop table DISTRICT_TYPE_LOAD;
---3. Âèêîíàòè ìîäèô³êàö³þ çíà÷åíü ó áóäü-ÿêèõ òàáëèöÿõ ÁÄ äëÿ îäíîãî
-update pacient set name = 'update many' where id > 3;
-update pacient set name = 'update one' where name = 'name3';
---4. Âèäàëèòè çàïèñè (îäèí çàïèñ, ãðóïó çàïèñ³â, óñ³ çàïèñè) 
---delete from pacient where id = 3;
---delete from pacient where id > 3;
---truncate table pacient;
+alter table registration 
+add constraint code_doctor
+foreign key (code_doctor) REFERENCES doctor (id);
