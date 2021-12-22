@@ -1,52 +1,34 @@
-CREATE TABLE doctor (
-  id int primary key,
-  surname varchar(60),
-  name varchar(60),
-  fathername varchar(60),
-  specialisatoin varchar(60),
-  category varchar(60),
-  dispancer int,
-    CONSTRAINT doctor_ibfk_1 FOREIGN KEY (dispancer) REFERENCES narko_dispancer (id) ON DELETE CASCADE 
-);
+--створення таблиць з даними
+create table DISTRICT_TYPE_1
+    as select id, name from pacient
+        where id <= 3;
+        
+create table DISTRICT_TYPE_2
+    as select id, name from narko_dispancer
+        where id > 2;
+        
+select * from DISTRICT_TYPE_1;
+select * from DISTRICT_TYPE_2;
+
+--1. Створити запит на виконання об’єднання (для будь-яких таблиць вашої БД).
+select * from DISTRICT_TYPE_1
+    union select * from DISTRICT_TYPE_2;
 
 
 
+    
+select * from DISTRICT_TYPE_1
+    union all select * from DISTRICT_TYPE_2;
 
+--2. Створити запит на виконання перетину (для будь-яких таблиць вашої БД).
 
-CREATE TABLE narko_dispancer (
-  id int primary key,
-  name varchar(60) ,
-  address varchar(60) ,
-  telephone varchar(60) ,
-  email varchar(60)
-);
+select * from DISTRICT_TYPE_1
+    intersect select * from DISTRICT_TYPE_2;
 
-CREATE TABLE pacient (
-  id int primary key,
-  surname varchar(60),
-  name varchar(60),
-  fathername varchar(60),
-  age int,
-  sex varchar(60),
-  telephone varchar(60),
-  employment varchar(60),
-  address varchar(60)
-);
+--3. Виконати запит на побудову різниці (для будь-яких таблиць вашої БД).
 
-CREATE TABLE registration (
-  id int primary key,
-  code_pacient int,
-  date_in date ,
-  date_out date ,
-  code_doctor int ,
-  diagnos varchar(60) ,
-  number_dispanser int ,
+select * from DISTRICT_TYPE_1
+    minus select * from DISTRICT_TYPE_2; 
 
-
-
-
-  number_palat int,
-   CONSTRAINT registration_ibfk_1 FOREIGN KEY (code_doctor) REFERENCES doctor (id) ON DELETE CASCADE,
-   CONSTRAINT registration_ibfk_2 FOREIGN KEY (code_pacient) REFERENCES pacient (id) ON DELETE CASCADE,
-   CONSTRAINT registration_ibfk_3 FOREIGN KEY (number_dispanser) REFERENCES narko_dispancer (id) ON DELETE CASCADE 
-) ;
+--4. Побудувати запит на виконання декартового добутку двох таблиць (для будь-яких таблиць вашої БД).
+select * from DISTRICT_TYPE_1, DISTRICT_TYPE_2;
