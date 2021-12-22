@@ -1,27 +1,52 @@
---1. Вилучити будь-який зв' язок між таблицями вашої БД.
-alter table doctor
-drop constraint doctor_ibfk_1 ;
---2. Вилучити і змінити характеристики поля у одній з таблиць вашої БД.
-alter table doctor
-drop column category;
-alter table doctor
-modify name varchar(50);
---3. Змінити поле у одній з таблиць вашої БД.
-alter table doctor
-rename column dispancer to dispancer_info_111;
---4. Додати поле і нове обмеження унікальності до будь-якої таблиці вашої БД.
-alter table doctor
-add age int;
+CREATE TABLE doctor (
+  id int primary key,
+  surname varchar(60),
+  name varchar(60),
+  fathername varchar(60),
+  specialisatoin varchar(60),
+  category varchar(60),
+  dispancer int,
+    CONSTRAINT doctor_ibfk_1 FOREIGN KEY (dispancer) REFERENCES narko_dispancer (id) ON DELETE CASCADE 
+);
 
 
 
 
-alter table doctor 
-add constraint constr unique (fathername, age);
---5. Змінити тип обмеження цілісності для зв' язку у одній з таблиць вашої ВД
-alter table registration
-drop constraint code_doctor;
 
-alter table registration 
-add constraint code_doctor
-foreign key (code_doctor) REFERENCES doctor (id);
+CREATE TABLE narko_dispancer (
+  id int primary key,
+  name varchar(60) ,
+  address varchar(60) ,
+  telephone varchar(60) ,
+  email varchar(60)
+);
+
+CREATE TABLE pacient (
+  id int primary key,
+  surname varchar(60),
+  name varchar(60),
+  fathername varchar(60),
+  age int,
+  sex varchar(60),
+  telephone varchar(60),
+  employment varchar(60),
+  address varchar(60)
+);
+
+CREATE TABLE registration (
+  id int primary key,
+  code_pacient int,
+  date_in date ,
+  date_out date ,
+  code_doctor int ,
+  diagnos varchar(60) ,
+  number_dispanser int ,
+
+
+
+
+  number_palat int,
+   CONSTRAINT registration_ibfk_1 FOREIGN KEY (code_doctor) REFERENCES doctor (id) ON DELETE CASCADE,
+   CONSTRAINT registration_ibfk_2 FOREIGN KEY (code_pacient) REFERENCES pacient (id) ON DELETE CASCADE,
+   CONSTRAINT registration_ibfk_3 FOREIGN KEY (number_dispanser) REFERENCES narko_dispancer (id) ON DELETE CASCADE 
+) ;
